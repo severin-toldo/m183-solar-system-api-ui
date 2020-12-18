@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "m183-solar-system-api-ui"
+    }
+  },
+  "defaultProject": "m183-solar-system-api-ui",
+  "cli": {
+    "analytics": false
+  }
 }

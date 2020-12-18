@@ -1,0 +1,34 @@
+<br/>
+<div class="m-5 row text-center">
+  <div class="col">
+  </div>
+  <div class="col">
+    <h1>Welcome to the Solar System!</h1>
+    <br/>
+    <br/>
+    <form [formGroup]="searchForm">
+      <input class="form-control"
+             type="search"
+             placeholder="Search Body"
+             aria-label="Search"
+             [formControlName]="'searchTerm'">
+    </form>
+    <br/>
+    <br/>
+      <ng-container *ngIf="(bodies$ | async) as bodies">
+        <div class="row" *ngFor="let chunk of chunkArray(bodies, 3)">
+          <div class="col p-2" *ngFor="let element of chunk">
+            <button *ngIf="element"
+                    [routerLink]="bodyRoute(element.id)"
+                    class="btn btn-outline-success"
+                    type="submit">{{ element.englishName }}</button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="(bodies$ | async)?.length === 0">
+        Nothing found :(
+      </ng-container>
+  </div>
+  <div class="col">
+  </div>
+</div>
