@@ -1,0 +1,11 @@
+<ng-container *ngIf="list && list.length !== 0">
+  <div *ngFor="let chunk of chunkArray()"
+       class="row">
+    <div *ngFor="let element of chunk"
+         class="col p-2">
+      <button *ngIf="element"
+              (click)="onElementClick(element)"
+              class="btn btn-outline-success">{{ element[displayPropertyName] }}</button>
+    </div>
+  </div>
+</ng-container>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {map, publishReplay, refCount, switchMap} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {Body} from "../../model/body.model";
@@ -18,6 +18,7 @@ export class BodyComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private bodyService: BodyService) {
   }
 
@@ -32,5 +33,10 @@ export class BodyComponent implements OnInit {
       }))
       .pipe(publishReplay())
       .pipe(refCount());
+  }
+
+  public onMoonClick(moon: any): void {
+    const id = moon.rel.split('/').pop();
+    this.router.navigate(bodyRoute(id));
   }
 }

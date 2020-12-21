@@ -7,12 +7,14 @@ import { BodyComponent } from './component/body/body.component';
 import { HomeComponent } from './component/home/home.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { ChunkListComponent } from './component/chunk-list/chunk-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BodyComponent,
-    HomeComponent
+    HomeComponent,
+    ChunkListComponent
   ],
   imports: [
     BrowserModule,

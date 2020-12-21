@@ -38,21 +38,8 @@ export class HomeComponent implements OnInit {
       .pipe(refCount());
   }
 
-  public chunkArray(array, chunkSize) {
-    let arrayLength = array.length;
-    let tmpArray = [];
-
-    for (let index = 0; index < arrayLength; index += chunkSize) {
-      const chunk: any[] = array.slice(index, index + chunkSize);
-
-      if (chunk.length !== chunkSize) {
-        chunk.push(null);
-      }
-
-      tmpArray.push(chunk);
-    }
-
-    return tmpArray;
+  public onBodyClick(body: Body): void {
+    this.router.navigate(bodyRoute(body.id));
   }
 
   // api somehow cannot filter for isPlanet...

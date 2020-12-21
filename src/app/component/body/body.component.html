@@ -18,27 +18,20 @@
           <b>Mass: </b> {{ body.mass.massValue }}^{{ body.mass.massExponent }} kg<br/>
           <b>Volume: </b> {{ body.vol.volValue }}^{{ body.vol.volExponent }} m3<br/>
         </p>
-        <!-- TODO around planet -->
-        <br/>
-        <table class="table-borderless w-100">
-          <thead>
-            <tr>
-              <th *ngIf="body.moons && body.moons.length !== 0"
-                  scope="col">Moons</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let moon of body.moons">
-              <td>
-                <!-- API is shitty designed. Getting the english name would mean a request each with kills peformance. -->
-                <button *ngIf="moon"
-                        [routerLink]="bodyRoute(moon.moon)"
-                        class="btn btn-outline-success m-2"
-                        type="submit">{{ moon.moon }}</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <ng-container *ngIf="body.aroundPlanet">
+          <br/>
+          <h4>Around Planet</h4>
+          <button [routerLink]="bodyRoute(body.aroundPlanet.planet)"
+                  class="btn btn-outline-success m-2"
+                  type="submit">{{ body.aroundPlanet.planet }}</button>
+        </ng-container>
+        <ng-container *ngIf="body.moons && body.moons.length !== 0">
+          <br/>
+          <h4>Moons</h4>
+          <app-chunk-list [list]="body.moons"
+                          [displayPropertyName]="'moon'"
+                          (onClick)="onMoonClick($event)"></app-chunk-list>
+        </ng-container>
       </div>
     </div>
     <div *ngIf="!(body$ | async)"

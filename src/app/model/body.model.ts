@@ -17,16 +17,14 @@ export class Body {
     volExponent: number
   };
 
+  public aroundPlanet: {
+    planet: string,
+    rel: string
+  };
+
   public moons: [
     {
       moon: string,
-      rel: string
-    }
-  ];
-
-  public aroundPlanet: [
-    {
-      planet: string,
       rel: string
     }
   ];
