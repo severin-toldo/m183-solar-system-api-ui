@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   public bodies$: Observable<Body[]>;
 
   public searchForm: FormGroup;
-  public bodyRoute = bodyRoute;
+  public readonly bodyRoute = bodyRoute;
 
 
   constructor(private fb: FormBuilder,
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
     return tmpArray;
   }
 
-  // api somehow cannot filter for isPlanet..
+  // api somehow cannot filter for isPlanet...
   private getPlanets(): Observable<Body[]> {
     return combineLatest(
       this.bodyService.getBodyById('mercure'),

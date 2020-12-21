@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {map, publishReplay, refCount, switchMap} from "rxjs/operators";
+import {Observable, of} from "rxjs";
+import {Body} from "../../model/body.model";
+import {BodyService} from "../../service/body.service";
+import { bodyRoute } from 'src/app/shared/routes';
 
 @Component({
   selector: 'app-body',
@@ -7,9 +13,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BodyComponent implements OnInit {
 
-  constructor() { }
+  public body$: Observable<Body>;
+  public readonly bodyRoute = bodyRoute;
 
-  ngOnInit(): void {
+
+  constructor(private route: ActivatedRoute,
+              private bodyService: BodyService) {
   }
 
+  public ngOnInit(): void {
+    this.body$ = this.route.params
+      .pipe(switchMap(params => {
+        if (params && params.id) {
+          return this.bodyService.getBodyById(params.id);
+        } else {
+          return of(null);
+        }
+      }))
+      .pipe(publishReplay())
+      .pipe(refCount());
+  }
 }

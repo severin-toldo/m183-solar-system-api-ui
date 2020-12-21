@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {getBodiesUrl} from "../shared/urls";
+import {getBodiesUrl, getBodyByIdUrl} from "../shared/urls";
 import {map} from "rxjs/operators";
 import {Body} from "../model/body.model";
 
@@ -14,18 +14,18 @@ export class BodyService {
   }
 
   public getBodyById(id: string): Observable<Body> {
-    return this.getBodiesByFilter(`id,eq,${id}`)
-      .pipe(map(res => res && res.length !== 0 ? res[0] : null));
+    return this.http.get<Body>(getBodyByIdUrl(id));
   }
 
   public getBodiesBySearchTerm(searchTerm: string): Observable<Body[]> {
-    return this.getBodiesByFilter(`englishName,cs,${searchTerm}`);
+    const params = new HttpParams()
+      .set('filter', `englishName,cs,${searchTerm}`);
+
+    return this.http.get<{}>(getBodiesUrl(), {params}).pipe(map(res => this.responseToList(res)));
   }
 
-  private getBodiesByFilter(filter: string): Observable<Body[]> {
-    const params = new HttpParams()
-      .set('filter', filter);
-
-    return this.http.get<{}>(getBodiesUrl(), {params}).pipe(map((res: any) => res.bodies)); // fuck this api. it's in french and shitty designed
+  // fuck this api. it's in french and shitty designed
+  private responseToList(res: any): Body[] {
+    return res.bodies && res.bodies.length !== 0 ? res.bodies : [];
   }
 }

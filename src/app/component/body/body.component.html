@@ -1,1 +1,54 @@
-<p>body works!</p>
+<br/>
+<div class="m-5 row">
+  <div class="col">
+  </div>
+  <div class="col">
+    <div *ngIf="(body$ | async) as body"
+         class="card">
+      <div class="card-body">
+        <h1 class="card-title">{{ body.englishName }}</h1>
+        <small class="text-muted">{{ body.isPlanet ? 'Planet' : 'Moon' }}</small>
+        <br/>
+        <br/>
+        <p class="card-text">
+          <b>Inclination: </b> {{ body.inclination }} °<br/>
+          <b>Density: </b> {{ body.density }} g/cm3<br/>
+          <b>Gravity: </b> {{ body.gravity }} N<br/>
+          <b>MeanRadius: </b> {{ body.meanRadius }} km<br/>
+          <b>Mass: </b> {{ body.mass.massValue }}^{{ body.mass.massExponent }} kg<br/>
+          <b>Volume: </b> {{ body.vol.volValue }}^{{ body.vol.volExponent }} m3<br/>
+        </p>
+        <!-- TODO around planet -->
+        <br/>
+        <table class="table-borderless w-100">
+          <thead>
+            <tr>
+              <th *ngIf="body.moons && body.moons.length !== 0"
+                  scope="col">Moons</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let moon of body.moons">
+              <td>
+                <!-- API is shitty designed. Getting the english name would mean a request each with kills peformance. -->
+                <button *ngIf="moon"
+                        [routerLink]="bodyRoute(moon.moon)"
+                        class="btn btn-outline-success m-2"
+                        type="submit">{{ moon.moon }}</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="!(body$ | async)"
+         class="card">
+      <div class="card-body">
+        <h1 class="card-title">Not found</h1>
+        <p class="card-text">No Body with this id could be found.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+  </div>
+</div>
