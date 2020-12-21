@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {bodyRoute} from "../../shared/routes";
-import {debounce, debounceTime, delay, last, map, publishReplay, refCount, startWith, switchMap} from "rxjs/operators";
-import {combineLatest, Observable, of} from "rxjs";
+import {debounceTime, publishReplay, refCount, startWith, switchMap} from "rxjs/operators";
+import {combineLatest, Observable} from "rxjs";
 import {BodyService} from "../../service/body.service";
 import {Body} from "../../model/body.model";
 

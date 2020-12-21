@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {map, publishReplay, refCount, switchMap} from "rxjs/operators";
+import {publishReplay, refCount, switchMap} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {Body} from "../../model/body.model";
 import {BodyService} from "../../service/body.service";
-import { bodyRoute } from 'src/app/shared/routes';
+import {bodyRoute} from 'src/app/shared/routes';
 
 @Component({
   selector: 'app-body',
