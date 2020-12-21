@@ -16,20 +16,9 @@
     <br/>
     <br/>
       <ng-container *ngIf="(bodies$ | async) as bodies">
-
-
-        <app-chunk-list [list]="bodies" [displayPropertyName]="'englishName'" (onClick)="onBodyClick($event)"></app-chunk-list>
-
-<!--        <div class="row" *ngFor="let chunk of chunkArray(bodies, 3)">-->
-<!--          <div class="col p-2" *ngFor="let element of chunk">-->
-<!--            <button *ngIf="element"-->
-<!--                    [routerLink]="bodyRoute(element.id)"-->
-<!--                    class="btn btn-outline-success"-->
-<!--                    type="submit">{{ element.englishName }}</button>-->
-<!--          </div>-->
-<!--        </div>-->
-
-
+        <app-chunk-list [list]="bodies"
+                        [displayPropertyName]="'englishName'"
+                        (onClick)="onBodyClick($event)"></app-chunk-list>
       </ng-container>
       <ng-container *ngIf="(bodies$ | async)?.length === 0">
         Nothing found :(

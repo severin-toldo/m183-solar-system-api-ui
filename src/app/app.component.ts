@@ -8,24 +8,11 @@ import {bodyRoute, homeRoute} from "./shared/routes";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  public searchForm: FormGroup;
   public homeRoute = homeRoute;
 
-
-  constructor(private fb: FormBuilder,
-              private router: Router) {
-  }
-
-  public ngOnInit(): void {
-    this.searchForm = this.fb.group({
-      searchTerm: ['', Validators.required]
-    });
-  }
-
-  public onSearch(): void {
-    const searchTerm = this.searchForm.get('searchTerm').value;
-    this.router.navigate(bodyRoute(searchTerm));
+  
+  constructor() {
   }
 }
